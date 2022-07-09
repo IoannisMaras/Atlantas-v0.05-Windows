@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:atlantas_windows/event_widget.dart';
 import 'dart:ui';
 
+import 'package:bitsdojo_window/bitsdojo_window.dart';
+
 void main(List<String> args) {
   if (args.firstOrNull == 'multi_window') {
     final windowId = int.parse(args[1]);
@@ -20,6 +22,13 @@ void main(List<String> args) {
   } else {
     runApp(const _ExampleMainWindow());
   }
+  doWhenWindowReady(() {
+    const initialSize = Size(600, 450);
+    appWindow.minSize = initialSize;
+    appWindow.size = initialSize;
+    appWindow.alignment = Alignment.center;
+    appWindow.show();
+  });
 }
 
 class _ExampleMainWindow extends StatefulWidget {

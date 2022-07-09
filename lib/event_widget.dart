@@ -90,44 +90,46 @@ class _EventWidgetState extends State<EventWidget> {
       debugPrint("onSend result: $result");
     }
 
-    return Column(
-      children: [
-        Expanded(
-          child: ListView.builder(
-            itemCount: messages.length,
-            reverse: true,
-            itemBuilder: (context, index) =>
-                _MessageItemWidget(item: messages[index]),
+    return Scaffold(
+      body: Column(
+        children: [
+          Expanded(
+            child: ListView.builder(
+              itemCount: messages.length,
+              reverse: true,
+              itemBuilder: (context, index) =>
+                  _MessageItemWidget(item: messages[index]),
+            ),
           ),
-        ),
-        Row(
-          children: [
-            SizedBox(
-              width: 100,
-              child: TextField(
-                controller: windowInputController,
-                decoration: const InputDecoration(
-                  labelText: 'Window ID',
+          Row(
+            children: [
+              SizedBox(
+                width: 100,
+                child: TextField(
+                  controller: windowInputController,
+                  decoration: const InputDecoration(
+                    labelText: 'Window ID',
+                  ),
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                 ),
-                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
               ),
-            ),
-            Expanded(
-              child: TextField(
-                controller: textInputController,
-                decoration: const InputDecoration(
-                  hintText: 'Enter message',
+              Expanded(
+                child: TextField(
+                  controller: textInputController,
+                  decoration: const InputDecoration(
+                    hintText: 'Enter message',
+                  ),
+                  onSubmitted: (text) => submit(),
                 ),
-                onSubmitted: (text) => submit(),
               ),
-            ),
-            IconButton(
-              icon: const Icon(Icons.send),
-              onPressed: submit,
-            ),
-          ],
-        ),
-      ],
+              IconButton(
+                icon: const Icon(Icons.send),
+                onPressed: submit,
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
